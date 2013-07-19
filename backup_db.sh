@@ -1,22 +1,24 @@
 #!/bin/bash
 
+#bambooHome="/opt/bamboo-home"
 bambooHome="/opt/bamboo-home"
 mysqlUser=bamboouser
-mysqlPw=$(<${bambooHome}/shh.txt)
 mysqlSchema=bamboo
 backupDir='/opt/bamboo-home/backups'
 currentTime=`date +"%Y-%m-%d-%H:%M"`
 
-checkSecret () {
+getSecret () {
   if [ ! -f ${bambooHome}/shh.txt ]
     then
       echo "ERROR:  Can't find the credentials for MYSQL"
       exit
+    else
+      mysqlPw=$(<${bambooHome}/shh.txt)
   fi
 }
 
 dumpSchema () {
-  checkSecret
+  getSecret
   if ! type mysqldump &>/dev/null;
     then
       echo 'The mysqldump command is not available.'
