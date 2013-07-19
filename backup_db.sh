@@ -8,7 +8,7 @@ backupDir='/opt/bamboo-home/backups'
 currentTime=`date +"%Y-%m-%d-%H:%M"`
 
 checkSecret () {
-  if [ ! -f shh.txt ]
+  if [ ! -f ${bambooHome}/shh.txt ]
     then
       echo "ERROR:  Can't find the credentials for MYSQL"
       exit
